@@ -10,6 +10,7 @@ const emit = defineEmits(["sendEnteredData"]);
       type="text"
       v-model="enteredItem"
       placeholder="What do you need to accomplish?"
+      @keyup.enter="emit('sendEnteredData', enteredItem)"
     />
     <button @click="emit('sendEnteredData', enteredItem)">
       Add To Do Item
