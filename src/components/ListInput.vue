@@ -1,5 +1,6 @@
 <script setup>
-const enteredItem = "";
+import { ref } from "vue";
+const enteredItem = ref("");
 
 const emit = defineEmits(["sendEnteredData"]);
 </script>
@@ -10,9 +11,17 @@ const emit = defineEmits(["sendEnteredData"]);
       type="text"
       v-model="enteredItem"
       placeholder="What do you need to accomplish?"
-      @keyup.enter="emit('sendEnteredData', enteredItem)"
+      @keyup.enter="
+        emit('sendEnteredData', enteredItem);
+        enteredItem = '';
+      "
     />
-    <button @click="emit('sendEnteredData', enteredItem)">
+    <button
+      @click="
+        emit('sendEnteredData', enteredItem);
+        enteredItem = '';
+      "
+    >
       Add To Do Item
     </button>
   </div>
