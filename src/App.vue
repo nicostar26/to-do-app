@@ -20,7 +20,7 @@ function deleteToDo(id) {
 <template>
   <div class="to-do-list">
     <div class="title">
-      <h1 class="title-text">To Do List</h1>
+      <h1 class="title-text">Lightning List</h1>
     </div>
     <ListInput @send-entered-data="updateList" />
     <div class="list-wrapper">
