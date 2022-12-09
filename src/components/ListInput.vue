@@ -3,6 +3,18 @@ import { ref } from "vue";
 const enteredItem = ref("");
 
 const emit = defineEmits(["sendEnteredData"]);
+
+function submitItems() {
+  fetch("https://lightning-list-5b57f-default-rtdb.firebaseio.com/list.json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      item: enteredItem.value,
+    }),
+  });
+}
 </script>
 
 <template>
@@ -12,6 +24,7 @@ const emit = defineEmits(["sendEnteredData"]);
       v-model="enteredItem"
       placeholder="What do you need to accomplish?"
       @keyup.enter="
+        submitItems();
         emit('sendEnteredData', enteredItem);
         enteredItem = '';
       "
