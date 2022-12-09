@@ -13,7 +13,6 @@ const emit = defineEmits(["delete"]);
 let isDone = ref(false);
 
 const toggle = () => (isDone.value = !isDone.value);
-console.log(isDone.value);
 </script>
 
 <template>
