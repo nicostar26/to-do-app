@@ -2,7 +2,7 @@
 import { ref } from "vue";
 const enteredItem = ref("");
 
-const emit = defineEmits(["sendEnteredData"]);
+const emit = defineEmits(["sendEnteredData", "updateList"]);
 
 function submitItems() {
   fetch("https://lightning-list-5b57f-default-rtdb.firebaseio.com/list.json", {
@@ -26,11 +26,13 @@ function submitItems() {
       @keyup.enter="
         submitItems();
         emit('sendEnteredData', enteredItem);
+        emit('updateList');
         enteredItem = '';
       "
     />
     <button
       @click="
+        submitItems();
         emit('sendEnteredData', enteredItem);
         enteredItem = '';
       "

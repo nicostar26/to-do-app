@@ -1,20 +1,44 @@
 <script setup>
 import ListInput from "./components/ListInput.vue";
 import ListItem from "./components/ListItem.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
-let listItem = ref("");
+//let listItem = ref("");
 
-let toDoList = ref([]);
+//let toDoList = ref([]);
 
-function updateList(task) {
-  listItem.value = task;
-  toDoList.value.push(task);
-}
+//function updateList(task) {
+//  listItem.value = task;
+//  toDoList.value.push(task);
+//  loadItems();
+//}
 
 function deleteToDo(id) {
-  toDoList.value.splice(id, 1);
+  toDoData.value.splice(id, 1);
 }
+
+// API CALL
+const toDoData = ref([]);
+
+function loadItems() {
+  fetch("https://lightning-list-5b57f-default-rtdb.firebaseio.com/list.json")
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then(function (data) {
+      const results = [];
+      for (const id in data) {
+        results.push({ id: id, item: data[id].item });
+      }
+      toDoData.value = results;
+      console.log(toDoData.value);
+    });
+}
+
+onMounted(loadItems);
+//onUpdated(loadItems);
 </script>
 
 <template>
@@ -22,12 +46,12 @@ function deleteToDo(id) {
     <div class="title">
       <h1 class="title-text">Lightning List</h1>
     </div>
-    <ListInput @send-entered-data="updateList" />
+    <ListInput @send-entered-data="loadItems" @update-list="loadItems" />
     <div class="list-wrapper">
       <ListItem
-        v-for="(toDo, id) in toDoList"
+        v-for="(toDo, id) in toDoData"
         :key="id"
-        :to-do-item="toDo"
+        :to-do-item="toDo.item"
         @delete="deleteToDo(id)"
       />
     </div>
