@@ -16,39 +16,25 @@ const toggle = () => (isDone.value = !isDone.value);
 </script>
 
 <template>
-  <div class="item-wrapper">
-    <span><input type="checkbox" @click="toggle()" /></span>
-    <span
-      ><h3 :class="{ active: isDone }" contentEditable="true">
+  <div class="flex items-center py-1 px-4">
+    <span class="flex-none"><input type="checkbox" @click="toggle()" /></span>
+    <span class="grow"
+      ><h3 class="py-0 px-4" :class="{ active: isDone }" contentEditable="true">
         {{ toDoItem.item }}
       </h3></span
     >
-    <span
-      ><button @click="emit('deleteItem', toDoItem.id)">Delete</button></span
+    <span class="flex-none"
+      ><button
+        class="p-1.5 text-sm shadow-md w-28 h-8 bg-gray-100 rounded"
+        @click="emit('deleteItem', toDoItem.id)"
+      >
+        Delete
+      </button></span
     >
   </div>
 </template>
 
 <style scoped>
-.item-wrapper {
-  display: flex;
-  align-items: center;
-  padding: 0.25rem 1rem;
-  border: black 0.15rem solid;
-}
-
-h3 {
-  padding: 0 0.5rem;
-}
-
-button {
-  height: 2rem;
-}
-
-span:last-of-type {
-  margin-left: auto;
-}
-
 .active {
   text-decoration: line-through;
   color: grey;

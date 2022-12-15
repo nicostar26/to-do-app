@@ -18,8 +18,9 @@ function submitItems() {
 </script>
 
 <template>
-  <div class="input">
+  <div class="my-4 mx-0 text-center flex justify-between">
     <input
+      class="my-0 mx-4 h-8 w-72 shadow-md p-1.5 rounded"
       type="text"
       v-model="enteredItem"
       placeholder="What do you need to accomplish?"
@@ -31,6 +32,7 @@ function submitItems() {
       "
     />
     <button
+      class="p-1.5 text-sm shadow-md w-28 h-8 bg-gray-100 rounded"
       @click="
         submitItems();
         emit('sendEnteredData', enteredItem);
@@ -38,23 +40,9 @@ function submitItems() {
         enteredItem = '';
       "
     >
-      Add To Do Item
+      Add
     </button>
   </div>
 </template>
 
-<style scoped>
-.input {
-  margin: 1rem 0;
-
-  text-align: center;
-}
-input {
-  margin: 0 1rem;
-  height: 1.5rem;
-  width: 15rem;
-}
-button {
-  padding: 0.35rem;
-}
-</style>
+<style scoped></style>

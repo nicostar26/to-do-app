@@ -40,12 +40,14 @@ onMounted(loadItems);
 </script>
 
 <template>
-  <div class="to-do-list">
-    <div class="title">
-      <h1 class="title-text">Lightning List</h1>
+  <div class="shadow-md rounded-xl pb-8 mx-auto my-20 h-96 max-w-2xl">
+    <div class="text-center bg-cyan-700 w-full rounded-xl">
+      <h1 class="text-2xl text-white uppercase font-bold p-8">
+        Lightning List
+      </h1>
     </div>
     <ListInput @send-entered-data="loadItems" @update-list="loadItems" />
-    <div class="list-wrapper">
+    <div class="h-96">
       <ListItem
         v-for="(toDo, id) in toDoData"
         :key="id"
@@ -56,28 +58,4 @@ onMounted(loadItems);
   </div>
 </template>
 
-<style scoped>
-.to-do-list {
-  border: black 0.25rem solid;
-  padding: 2rem;
-  max-width: 40rem;
-  height: 40rem;
-  margin: 10rem auto;
-}
-
-.title {
-  text-align: center;
-}
-
-.title-text {
-  text-transform: uppercase;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0 auto;
-}
-
-.list-wrapper {
-  overflow-y: scroll;
-  height: 32rem;
-}
-</style>
+<style scoped></style>
