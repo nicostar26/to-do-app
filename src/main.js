@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import './style.css'
 import App from './App.vue'
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
