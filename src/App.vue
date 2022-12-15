@@ -3,20 +3,6 @@ import ListInput from "./components/ListInput.vue";
 import ListItem from "./components/ListItem.vue";
 import { ref, onMounted } from "vue";
 
-//let listItem = ref("");
-
-//let toDoList = ref([]);
-
-//function updateList(task) {
-//  listItem.value = task;
-//  toDoList.value.push(task);
-//  loadItems();
-//}
-
-function deleteToDo(id) {
-  toDoData.value.splice(id, 1);
-}
-
 // API CALL
 const toDoData = ref([]);
 
@@ -33,8 +19,20 @@ function loadItems() {
         results.push({ id: id, item: data[id].item });
       }
       toDoData.value = results;
-      console.log(toDoData.value);
     });
+}
+
+function deleteItems(id) {
+  fetch(
+    `https://lightning-list-5b57f-default-rtdb.firebaseio.com/list/${id}.json`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: null,
+    }
+  ).then(loadItems);
 }
 
 onMounted(loadItems);
@@ -51,8 +49,8 @@ onMounted(loadItems);
       <ListItem
         v-for="(toDo, id) in toDoData"
         :key="id"
-        :to-do-item="toDo.item"
-        @delete="deleteToDo(id)"
+        :to-do-item="toDo"
+        @delete-item="deleteItems"
       />
     </div>
   </div>

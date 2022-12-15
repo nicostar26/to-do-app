@@ -34,6 +34,7 @@ function submitItems() {
       @click="
         submitItems();
         emit('sendEnteredData', enteredItem);
+        emit('updateList');
         enteredItem = '';
       "
     >

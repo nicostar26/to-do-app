@@ -3,12 +3,12 @@ import { ref } from "vue";
 
 defineProps({
   toDoItem: {
-    type: String,
+    type: Object,
     required: true,
   },
 });
 
-const emit = defineEmits(["delete"]);
+const emit = defineEmits(["deleteItem"]);
 
 let isDone = ref(false);
 
@@ -20,10 +20,12 @@ const toggle = () => (isDone.value = !isDone.value);
     <span><input type="checkbox" @click="toggle()" /></span>
     <span
       ><h3 :class="{ active: isDone }" contentEditable="true">
-        {{ toDoItem }}
+        {{ toDoItem.item }}
       </h3></span
     >
-    <span><button @click="emit('delete')">Delete</button></span>
+    <span
+      ><button @click="emit('deleteItem', toDoItem.id)">Delete</button></span
+    >
   </div>
 </template>
 
